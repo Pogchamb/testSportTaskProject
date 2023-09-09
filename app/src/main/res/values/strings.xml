@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">testSportTaskProject</string>
+
+
+    <string name="firstDay_warm_up">15 суперменов\n10 пулловеров в hollow c резиной</string>
+    <string name="firstDay_technic">Е3/12 \n
+\n
+6-8 подтягиваний кипом до подбородка или до груди \n
+4 челнока бега с касанием \n
+6-8 подтягиваний кипом до подбородка или до груди \n
+4 челнока бега с касанием\n
+6-8 подтягиваний кипом до подбородка или до груди </string>
+    <string name="firstDay_efficiency">5х: \n
+\n
+16 рывковыпадов 22,5/15 \n
+12/12 тяг ренегата 22,5/15 \n
+48 перепрыгиваний гантели  \n
+\n
+cap: 17 minute
+</string>
+    <string name="firstDay_hitch">3х: \n
+\n
+30-35 second разгибаний с гантелей из-за головы сидя \n
+30-35 second Т-подъёмов с гантелями</string>
+
+
 </resources>
