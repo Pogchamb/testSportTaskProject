@@ -1,8 +1,9 @@
 package pa.chan.main_page.domain
 
 import pa.chan.main_page.domain.model.TrainModel
+import javax.inject.Inject
 
-class GetTrainingProgramUseCase(
+class GetTrainingProgramUseCase @Inject constructor(
     private val mainRepository: MainRepository
 ) {
     operator fun invoke(): List<TrainModel> {

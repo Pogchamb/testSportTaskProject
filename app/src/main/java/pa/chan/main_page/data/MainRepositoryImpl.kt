@@ -2,8 +2,9 @@ package pa.chan.main_page.data
 
 import pa.chan.main_page.domain.MainRepository
 import pa.chan.main_page.domain.model.TrainModel
+import javax.inject.Inject
 
-class MainRepositoryImpl(
+class MainRepositoryImpl @Inject constructor(
     private val trainingDataSource: TrainingDataSource
 ) : MainRepository {
 
