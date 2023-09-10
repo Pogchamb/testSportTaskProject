@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TestSportTaskProject"
         tools:targetApi="34">
         <activity
-            android:name=".MainActivity"
+            android:name=".main_page.presentation.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
