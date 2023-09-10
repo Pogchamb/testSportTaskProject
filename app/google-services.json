@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "976304519401",
+    "project_id": "testsporttaskproject",
+    "storage_bucket": "testsporttaskproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976304519401:android:63bde0061a2205ebaad878",
+        "android_client_info": {
+          "package_name": "pa.chan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4YocwNSMAdsdk5rXmrUTaJGtD28_T_gE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
