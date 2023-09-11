@@ -67,4 +67,7 @@ dependencies {
 
     //analytics
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Remote Config
+    implementation 'com.google.firebase:firebase-config-ktx'
 }
