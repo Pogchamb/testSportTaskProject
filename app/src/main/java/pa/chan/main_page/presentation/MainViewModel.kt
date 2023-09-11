@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getTrainingProgramUseCase: GetTrainingProgramUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _trainLiveData: MutableLiveData<List<TrainModel?>> = MutableLiveData()
     val trainLiveData: LiveData<List<TrainModel?>>
         get() = _trainLiveData
