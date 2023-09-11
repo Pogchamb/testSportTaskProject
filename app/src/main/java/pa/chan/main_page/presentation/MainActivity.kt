@@ -1,5 +1,6 @@
 package pa.chan.main_page.presentation
 
+import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.webkit.CookieManager
@@ -8,6 +9,10 @@ import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.BuildConfig
 import pa.chan.R
@@ -36,6 +41,22 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+        val configSettings = remoteConfigSettings {
+            minimumFetchIntervalInSeconds = 3600
+        }
+        remoteConfig.setConfigSettingsAsync(configSettings)
+
+
+        remoteConfig.fetchAndActivate()
+            .addOnCompleteListener {
+                it.result
+            }
+
+        val url = remoteConfig.getString("url")
+
+
+        // WebView
         webView = findViewById(R.id.webView)
         webView.webViewClient = WebViewClient()
         val webSettings = webView.settings
@@ -43,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState != null)
             webView.restoreState(savedInstanceState)
         else
-            webView.loadUrl("https://www.allmmorpg.ru/wow/wotlk/gajd-po-travnichestvu-1-450-wow-wotlk/")
+            webView.loadUrl(url)
         webView.settings.domStorageEnabled = true
         webView.settings.javaScriptCanOpenWindowsAutomatically = true
         val cookieManager = CookieManager.getInstance()
@@ -60,6 +81,10 @@ class MainActivity : AppCompatActivity() {
         mWebSettings.loadWithOverviewMode = true
         mWebSettings.useWideViewPort = true
 
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
