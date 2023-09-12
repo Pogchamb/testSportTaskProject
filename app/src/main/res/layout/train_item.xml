@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/wrapLayout"
@@ -15,59 +15,50 @@
             android:id="@+id/trainName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="Тренировка"
-            android:textSize="20sp"/>
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/unwrapBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/ic_baseline_keyboard_arrow_down"
-            android:backgroundTint="@color/white"/>
-
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/unwrapLayout"
-        app:layout_constraintTop_toBottomOf="@id/wrapLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible">
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/wrapLayout">
 
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/warmUpText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/unwrapLayout"
-            android:text="@string/firstDay_warm_up"/>
+            app:layout_constraintTop_toTopOf="@id/unwrapLayout" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/technicText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/warmUpText"
-            android:text="@string/firstDay_technic"/>
+            app:layout_constraintTop_toBottomOf="@id/warmUpText" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/efficiencyText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/technicText"
-            android:text="@string/firstDay_efficiency"/>
+            app:layout_constraintTop_toBottomOf="@id/technicText" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/hitchText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/efficiencyText"
-            android:text="@string/firstDay_hitch"/>
+            app:layout_constraintTop_toBottomOf="@id/efficiencyText" />
+
+        <View
+            android:id="@+id/separator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/hitchText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

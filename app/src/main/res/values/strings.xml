@@ -2,27 +2,121 @@
     <string name="app_name">testSportTaskProject</string>
     <string name="error_mes">Check your internet connection!</string>
 
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="plan">Your training plan for the week!</string>
 
-    <string name="firstDay_warm_up">15 суперменов\n10 пулловеров в hollow c резиной</string>
-    <string name="firstDay_technic">Е3/12 \n
-\n
-6-8 подтягиваний кипом до подбородка или до груди \n
-4 челнока бега с касанием \n
-6-8 подтягиваний кипом до подбородка или до груди \n
-4 челнока бега с касанием\n
-6-8 подтягиваний кипом до подбородка или до груди </string>
-    <string name="firstDay_efficiency">5х: \n
-\n
-16 рывковыпадов 22,5/15 \n
-12/12 тяг ренегата 22,5/15 \n
-48 перепрыгиваний гантели  \n
-\n
-cap: 17 minute
-</string>
-    <string name="firstDay_hitch">3х: \n
-\n
-30-35 second разгибаний с гантелей из-за головы сидя \n
-30-35 second Т-подъёмов с гантелями</string>
+    // monday train
+    <string name="monday_warm_up">
+        15 supermen\n10 pullovers in hollow with rubber
+    </string>
+    <string name="monday_technic">
+        Е3/12 \n
+        6-8 pull-ups with a kip to the chin or to the chest \n
+        4 shuttle runs with a touch \n
+        6-8 pull-ups with a kip to the chin or to the chest \n
+        4 shuttle runs with a touch \n
+        6-8 pull-ups with a kip to the chin or to the chest
+    </string>
+    <string name="monday_efficiency">
+        5х: \n
+        16 jerks 22,5/15 \n
+        12/12 renegade pulls 22,5/15 \n
+        48 dumbbell jumps \n
+        \n
+        cap: 17 minute
+    </string>
+    <string name="monday_hitch">
+        3х: \n
+        30-35 second extensions with dumbbells from behind the head while sitting \n
+        30-35 second T-lifts with dumbbells
+    </string>
 
+    // tuesday train
+
+    <string name="tuesday_warm_up">
+         5 minutes of cardio
+    </string>
+    <string name="tuesday_technic">
+        E3,5/10,5\n
+        10-12 pullovers with dumbbells\n
+        20-25 facial pulls
+    </string>
+    <string name="tuesday_efficiency">
+        2x:\n
+        1500/1200 m. rowing or 70/55 calories bike\n
+        25 run shuttle 8 m.\n
+        \n
+        cap: 25 minute
+    </string>
+    <string name="tuesday_hitch">
+        Stretching
+    </string>
+
+    // wednesday train
+
+    <string name="wednesday_warm_up">
+        10 lifts of a 6/4 kg medball in front of you\n
+        10 squats with a medball at the chest"
+    </string>
+    <string name="wednesday_technic">
+        E3,5/14\n
+        8 frontal squats\n
+        12 reverse snow angels (first 3 approaches)\n
+    </string>
+    <string name="wednesday_efficiency">
+        2x:\n
+        6-4-2 burpee with a 50/30 kg slamball lift on the shoulder\n
+        15-12-9 pull-ups (w:-2)\n
+        24-24-24 scissors on the pancake in the stop\n
+    </string>
+    <string name="wednesday_hitch">
+        3x:\n
+        15-17/15-17 o/legs buttock bridges with dumbbells supported on a bench\n
+        30-40"/30-40" side plank
+    </string>
+
+    // thursday train
+
+    <string name="thursday_warm_up">
+        15 supermen\n
+    </string>
+    <string name="thursday_technic">
+        10 pullovers in hollow with rubber
+    </string>
+    <string name="thursday_efficiency">
+        AMRAP: 8 minute\n
+        5 rope lifts from a lying position with legs on 3 pancakes / 8 tracks\n
+        4 shuttles of farm carrying 2 weights 32/24 kg.\n
+        30 Russian twists with medball 6/4 kg / pendulums through medball\n
+        \n
+        rest 4 minute
+    </string>
+    <string name="thursday_hitch">
+        Stretching
+    </string>
+
+    // friday train
+
+    <string name="friday_warm_up">
+        5 minutes of cardio
+    </string>
+    <string name="friday_technic">
+        E4/12 \n
+        12-13 Arnold bench presses with kettlebells\n
+        14-15/14-15 dumbbell pull to the belt with an emphasis on the bench
+    </string>
+    <string name="friday_efficiency">
+        3x:\n
+        5/5 barbell takes 60/40\n
+        25 synchronous jumping bars\n
+        40 air squats (10 each)\n
+    </string>
+    <string name="friday_hitch">
+        Stretching
+    </string>
 
 </resources>

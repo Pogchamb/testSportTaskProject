@@ -9,39 +9,39 @@ class TrainingDataSource @Inject constructor() {
     fun getWeekListOfTrain(): List<TrainModel> {
         return listOf(
             TrainModel(
-                id = 1,
-                warmUp = R.string.firstDay_warm_up,
-                technic = R.string.firstDay_technic,
-                efficiency = R.string.firstDay_efficiency,
-                hitch = R.string.firstDay_hitch
+                name = R.string.monday,
+                warmUp = R.string.monday_warm_up,
+                technic = R.string.monday_technic,
+                efficiency = R.string.monday_efficiency,
+                hitch = R.string.monday_hitch
             ),
             TrainModel(
-                id = 2,
-                warmUp = R.string.firstDay_warm_up,
-                technic = R.string.firstDay_technic,
-                efficiency = R.string.firstDay_efficiency,
-                hitch = R.string.firstDay_hitch
+                name = R.string.tuesday,
+                warmUp = R.string.tuesday_warm_up,
+                technic = R.string.tuesday_technic,
+                efficiency = R.string.tuesday_efficiency,
+                hitch = R.string.tuesday_hitch
             ),
             TrainModel(
-                id = 3,
-                warmUp = R.string.firstDay_warm_up,
-                technic = R.string.firstDay_technic,
-                efficiency = R.string.firstDay_efficiency,
-                hitch = R.string.firstDay_hitch
+                name = R.string.wednesday,
+                warmUp = R.string.wednesday_warm_up,
+                technic = R.string.wednesday_technic,
+                efficiency = R.string.wednesday_efficiency,
+                hitch = R.string.wednesday_hitch
             ),
             TrainModel(
-                id = 4,
-                warmUp = R.string.firstDay_warm_up,
-                technic = R.string.firstDay_technic,
-                efficiency = R.string.firstDay_efficiency,
-                hitch = R.string.firstDay_hitch
+                name = R.string.thursday,
+                warmUp = R.string.thursday_warm_up,
+                technic = R.string.thursday_technic,
+                efficiency = R.string.thursday_efficiency,
+                hitch = R.string.thursday_hitch
             ),
             TrainModel(
-                id = 5,
-                warmUp = R.string.firstDay_warm_up,
-                technic = R.string.firstDay_technic,
-                efficiency = R.string.firstDay_efficiency,
-                hitch = R.string.firstDay_hitch
+                name = R.string.friday,
+                warmUp = R.string.friday_warm_up,
+                technic = R.string.friday_technic,
+                efficiency = R.string.friday_efficiency,
+                hitch = R.string.friday_hitch
             )
 
         )
