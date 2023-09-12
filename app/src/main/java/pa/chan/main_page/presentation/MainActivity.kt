@@ -49,11 +49,13 @@ class MainActivity : AppCompatActivity() {
                     _binding?.ErrorField?.visibility = View.GONE
                     _binding?.webView?.visibility = View.VISIBLE
                     _binding?.trainRecycler?.visibility = View.GONE
+                    _binding?.plan?.visibility = View.GONE
                     startWebView(webView, savedInstanceState, url)
                 } else {
                     _binding?.ErrorField?.visibility = View.VISIBLE
                     _binding?.webView?.visibility = View.GONE
                     _binding?.trainRecycler?.visibility = View.GONE
+                    _binding?.plan?.visibility = View.GONE
                 }
             }
         }
@@ -70,12 +72,14 @@ class MainActivity : AppCompatActivity() {
                 _binding?.ErrorField?.visibility = View.GONE
                 _binding?.webView?.visibility = View.GONE
                 _binding?.trainRecycler?.visibility = View.VISIBLE
+                _binding?.plan?.visibility = View.VISIBLE
                 viewModel.startStub()
             } else {
                 viewModel.saveLink(url)
                 _binding?.ErrorField?.visibility = View.GONE
                 _binding?.webView?.visibility = View.VISIBLE
                 _binding?.trainRecycler?.visibility = View.GONE
+                _binding?.plan?.visibility = View.GONE
                 startWebView(webView = webView, savedInstanceState, url)
             }
         }
@@ -86,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                     _binding?.ErrorField?.visibility = View.VISIBLE
                     _binding?.webView?.visibility = View.GONE
                     _binding?.trainRecycler?.visibility = View.GONE
+                    _binding?.plan?.visibility = View.GONE
                 }
             }
         }
