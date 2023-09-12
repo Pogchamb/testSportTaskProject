@@ -1,22 +1,22 @@
 package pa.chan.main_page.presentation
 
-import android.content.res.Configuration
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.webkit.CookieManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.google.firebase.remoteconfig.ktx.remoteConfig
-import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.BuildConfig
 import pa.chan.R
 import pa.chan.databinding.ActivityMainBinding
+import pa.chan.main_page.data.userException.ConnectionException
 import java.util.*
 
 @AndroidEntryPoint
@@ -32,59 +32,63 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
-        viewModel.startStub()
+
+        viewModel.hasLink()
+        webView = findViewById(R.id.webView)
+
+        viewModel.hasLinkLiveData.observe(this) { url ->
+            if (url.isNullOrEmpty()) {
+                viewModel.getUrl()
+            } else {
+                val connectionManager: ConnectivityManager =
+                    this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
+                val isConnected = activeNetwork?.isConnectedOrConnecting == true
+
+                if (isConnected) {
+                    _binding?.ErrorField?.visibility = View.GONE
+                    _binding?.webView?.visibility = View.VISIBLE
+                    _binding?.trainRecycler?.visibility = View.GONE
+                    startWebView(webView, savedInstanceState, url)
+                } else {
+                    _binding?.ErrorField?.visibility = View.VISIBLE
+                    _binding?.webView?.visibility = View.GONE
+                    _binding?.trainRecycler?.visibility = View.GONE
+                }
+            }
+        }
 
         binding?.trainRecycler?.layoutManager = LinearLayoutManager(this)
-
         viewModel.trainLiveData.observe(this) {
             binding?.trainRecycler?.adapter = MainAdapter(it)
         }
 
 
-        val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
-        val configSettings = remoteConfigSettings {
-            minimumFetchIntervalInSeconds = 3600
-        }
-        remoteConfig.setConfigSettingsAsync(configSettings)
 
-
-        remoteConfig.fetchAndActivate()
-            .addOnCompleteListener {
-                it.result
+        viewModel.linkLiveData.observe(this) { url ->
+            if (url.isNullOrEmpty() || checkIsEmu()) {
+                _binding?.ErrorField?.visibility = View.GONE
+                _binding?.webView?.visibility = View.GONE
+                _binding?.trainRecycler?.visibility = View.VISIBLE
+                viewModel.startStub()
+            } else {
+                viewModel.saveLink(url)
+                _binding?.ErrorField?.visibility = View.GONE
+                _binding?.webView?.visibility = View.VISIBLE
+                _binding?.trainRecycler?.visibility = View.GONE
+                startWebView(webView = webView, savedInstanceState, url)
             }
+        }
 
-        val url = remoteConfig.getString("url")
-
-
-        // WebView
-        webView = findViewById(R.id.webView)
-        webView.webViewClient = WebViewClient()
-        val webSettings = webView.settings
-        webSettings.javaScriptEnabled = true
-        if (savedInstanceState != null)
-            webView.restoreState(savedInstanceState)
-        else
-            webView.loadUrl(url)
-        webView.settings.domStorageEnabled = true
-        webView.settings.javaScriptCanOpenWindowsAutomatically = true
-        val cookieManager = CookieManager.getInstance()
-        cookieManager.setAcceptCookie(true)
-        val mWebSettings = this.webView.settings
-        mWebSettings.javaScriptEnabled = true
-        mWebSettings.loadWithOverviewMode = true
-        mWebSettings.useWideViewPort = true
-        mWebSettings.domStorageEnabled = true
-        mWebSettings.databaseEnabled = true
-        mWebSettings.setSupportZoom(false)
-        mWebSettings.allowFileAccess = true
-        mWebSettings.allowContentAccess = true
-        mWebSettings.loadWithOverviewMode = true
-        mWebSettings.useWideViewPort = true
-
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
+        viewModel.errorLiveData.observe(this) { error ->
+            when (error) {
+                ConnectionException -> {
+                    _binding?.ErrorField?.visibility = View.VISIBLE
+                    _binding?.webView?.visibility = View.GONE
+                    _binding?.trainRecycler?.visibility = View.GONE
+                }
+            }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -99,6 +103,30 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+private fun startWebView(webView: WebView, savedInstanceState: Bundle?, url: String) {
+    webView.webViewClient = WebViewClient()
+    val webSettings = webView.settings
+    webSettings.javaScriptEnabled = true
+    if (savedInstanceState != null)
+        webView.restoreState(savedInstanceState)
+    else
+        webView.loadUrl(url)
+    webView.settings.domStorageEnabled = true
+    webView.settings.javaScriptCanOpenWindowsAutomatically = true
+    val cookieManager = CookieManager.getInstance()
+    cookieManager.setAcceptCookie(true)
+    val mWebSettings = webView.settings
+    mWebSettings.javaScriptEnabled = true
+    mWebSettings.loadWithOverviewMode = true
+    mWebSettings.useWideViewPort = true
+    mWebSettings.domStorageEnabled = true
+    mWebSettings.databaseEnabled = true
+    mWebSettings.setSupportZoom(false)
+    mWebSettings.allowFileAccess = true
+    mWebSettings.allowContentAccess = true
+    mWebSettings.loadWithOverviewMode = true
+    mWebSettings.useWideViewPort = true
+}
 
 private fun checkIsEmu(): Boolean {
     if (BuildConfig.DEBUG) return false // when developer use this build on emulator
