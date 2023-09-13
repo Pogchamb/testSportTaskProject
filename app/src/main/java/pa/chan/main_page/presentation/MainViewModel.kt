@@ -1,5 +1,6 @@
 package pa.chan.main_page.presentation
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,23 +9,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import pa.chan.main_page.data.userException.ConnectionException
 import pa.chan.main_page.data.userException.UserException
-import pa.chan.main_page.domain.CheckLInkUseCase
-import pa.chan.main_page.domain.GetTrainingProgramUseCase
-import pa.chan.main_page.domain.GetUrlUseCase
-import pa.chan.main_page.domain.SaveLinkUseCase
-import pa.chan.main_page.domain.model.TrainModel
+import pa.chan.main_page.domain.*
+import pa.chan.main_page.domain.model.QuestionModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val getTrainingProgramUseCase: GetTrainingProgramUseCase,
+    private val getQuizUseCase: GetQuizUseCase,
     private val saveLinkUseCase: SaveLinkUseCase,
     private val checkLInkUseCase: CheckLInkUseCase,
     private val getUrlUseCase: GetUrlUseCase
 ) : ViewModel() {
-    private val _trainLiveData: MutableLiveData<List<TrainModel?>> = MutableLiveData()
-    val trainLiveData: LiveData<List<TrainModel?>>
-        get() = _trainLiveData
+    private val _quizLiveData: MutableLiveData<List<QuestionModel?>?> = MutableLiveData()
+    val quizLiveData: LiveData<List<QuestionModel?>?>
+        get() = _quizLiveData
 
     private val _hasLinkLiveData: MutableLiveData<String?> = MutableLiveData()
     val hasLinkLiveData: LiveData<String?>
@@ -38,6 +36,10 @@ class MainViewModel @Inject constructor(
     val errorLiveData: LiveData<UserException>
         get() = _errorLiveData
 
+    private val _questionLiveData: MutableLiveData<QuestionModel?> = MutableLiveData()
+    val questionLiveData: LiveData<QuestionModel?>
+        get() = _questionLiveData
+
     fun getUrl() {
         viewModelScope.launch {
             try {
@@ -48,8 +50,14 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun startStub() {
-        _trainLiveData.postValue(getTrainingProgramUseCase())
+    fun nextQuestion() {
+        val randomInt = (0..48).random()
+        val question = _quizLiveData.value?.get(randomInt)
+        _questionLiveData.postValue(question)
+    }
+
+    fun startStub(context: Context) {
+        _quizLiveData.postValue(getQuizUseCase(context))
     }
 
     fun hasLink() {

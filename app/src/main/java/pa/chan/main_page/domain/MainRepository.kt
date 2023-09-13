@@ -1,9 +1,10 @@
 package pa.chan.main_page.domain
 
-import pa.chan.main_page.domain.model.TrainModel
+import android.content.Context
+import pa.chan.main_page.domain.model.QuestionModel
 
 interface MainRepository {
-    fun getWeekTrain(): List<TrainModel>
+    fun getQuiz(context: Context): List<QuestionModel>?
     suspend fun saveLink(url: String)
     suspend fun checkLink(): String?
     suspend fun getLink(): String
