@@ -11,7 +11,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.BuildConfig
 import pa.chan.R
@@ -32,10 +31,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+        var totalScore = 0
 
-        viewModel.hasLink()
         webView = findViewById(R.id.webView)
 
+        viewModel.hasLink()
         viewModel.hasLinkLiveData.observe(this) { url ->
             if (url.isNullOrEmpty()) {
                 viewModel.getUrl()
@@ -48,38 +48,85 @@ class MainActivity : AppCompatActivity() {
                 if (isConnected) {
                     _binding?.ErrorField?.visibility = View.GONE
                     _binding?.webView?.visibility = View.VISIBLE
-                    _binding?.trainRecycler?.visibility = View.GONE
-                    _binding?.plan?.visibility = View.GONE
+                    _binding?.quizLayout?.visibility = View.GONE
+                    binding?.startLayout?.visibility = View.GONE
                     startWebView(webView, savedInstanceState, url)
                 } else {
                     _binding?.ErrorField?.visibility = View.VISIBLE
                     _binding?.webView?.visibility = View.GONE
-                    _binding?.trainRecycler?.visibility = View.GONE
-                    _binding?.plan?.visibility = View.GONE
+                    _binding?.quizLayout?.visibility = View.GONE
+                    binding?.startLayout?.visibility = View.GONE
                 }
             }
         }
 
-        binding?.trainRecycler?.layoutManager = LinearLayoutManager(this)
-        viewModel.trainLiveData.observe(this) {
-            binding?.trainRecycler?.adapter = MainAdapter(it)
+        viewModel.quizLiveData.observe(this) {
+            binding?.startLayout?.visibility = View.VISIBLE
+        }
+
+        binding?.nextAnswer?.setOnClickListener {
+            binding?.startGame(totalScore)
+            viewModel.nextQuestion()
+        }
+
+        binding?.newGame?.setOnClickListener {
+            totalScore = 0
+            binding?.refreshGame(totalScore, this)
+        }
+
+        viewModel.questionLiveData.observe(this) { model ->
+            binding?.totalScoreField?.text =
+                String.format(getString(R.string.current_score), totalScore.toString())
+            binding?.question?.text = model?.question
+            binding?.firstAnswer?.text = model?.variants?.get(0)
+            binding?.secondAnswer?.text = model?.variants?.get(1)
+            binding?.thirdAnswer?.text = model?.variants?.get(2)
+
+
+            binding?.firstAnswer?.setOnClickListener {
+                if (binding?.firstAnswer!!.text == model?.correctAnswer) {
+                    totalScore += 100
+                    binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
+                } else {
+                    totalScore -= 50
+                    binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
+                }
+            }
+
+            binding?.secondAnswer?.setOnClickListener {
+                if (binding?.secondAnswer!!.text == model?.correctAnswer) {
+                    totalScore += 100
+                    binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
+                } else {
+                    totalScore -= 50
+                    binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
+                }
+            }
+
+            binding?.thirdAnswer?.setOnClickListener {
+                if (binding?.thirdAnswer!!.text == model?.correctAnswer) {
+                    totalScore += 100
+                    binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
+                } else {
+                    totalScore -= 50
+                    binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
+                }
+            }
         }
 
 
-
         viewModel.linkLiveData.observe(this) { url ->
-            if (url.isNullOrEmpty() || checkIsEmu()) {
+            if (checkIsEmu() || url.isNullOrEmpty()) {
                 _binding?.ErrorField?.visibility = View.GONE
                 _binding?.webView?.visibility = View.GONE
-                _binding?.trainRecycler?.visibility = View.VISIBLE
-                _binding?.plan?.visibility = View.VISIBLE
-                viewModel.startStub()
+                _binding?.quizLayout?.visibility = View.GONE
+                viewModel.startStub(this)
             } else {
                 viewModel.saveLink(url)
                 _binding?.ErrorField?.visibility = View.GONE
                 _binding?.webView?.visibility = View.VISIBLE
-                _binding?.trainRecycler?.visibility = View.GONE
-                _binding?.plan?.visibility = View.GONE
+                _binding?.quizLayout?.visibility = View.GONE
+                binding?.startLayout?.visibility = View.GONE
                 startWebView(webView = webView, savedInstanceState, url)
             }
         }
@@ -89,8 +136,8 @@ class MainActivity : AppCompatActivity() {
                 ConnectionException -> {
                     _binding?.ErrorField?.visibility = View.VISIBLE
                     _binding?.webView?.visibility = View.GONE
-                    _binding?.trainRecycler?.visibility = View.GONE
-                    _binding?.plan?.visibility = View.GONE
+                    _binding?.quizLayout?.visibility = View.GONE
+                    binding?.startLayout?.visibility = View.GONE
                 }
             }
         }
@@ -106,6 +153,46 @@ class MainActivity : AppCompatActivity() {
             webView.goBack()
         }
     }
+}
+
+private fun ActivityMainBinding.refreshGame(score: Int, context: Context) {
+    this.startLayout.visibility = View.VISIBLE
+    this.ErrorField.visibility = View.GONE
+    this.webView.visibility = View.GONE
+    this.score.text = score.toString()
+    this.textRules.text = context.getString(R.string.rules)
+    this.nextAnswer.text = context.getString(R.string.start)
+    this.quizLayout.visibility = View.GONE
+}
+
+private fun ActivityMainBinding.startGame(score: Int) {
+    this.startLayout.visibility = View.GONE
+    this.ErrorField.visibility = View.GONE
+    this.webView.visibility = View.GONE
+    this.score.text = score.toString()
+    this.quizLayout.visibility = View.VISIBLE
+}
+
+private fun ActivityMainBinding.nextQuestion(
+    rightAnswer: String?,
+    score: Int,
+    answer: String,
+    context: Context
+) {
+    this.startLayout.visibility = View.VISIBLE
+    this.ErrorField.visibility = View.GONE
+    this.webView.visibility = View.GONE
+    this.quizLayout.visibility = View.GONE
+    if (rightAnswer == answer) {
+        this.textRules.text =
+            String.format(context.getString(R.string.rightAnswerStr), rightAnswer, answer)
+    } else {
+        this.textRules.text =
+            String.format(context.getString(R.string.rightAnswerStr), rightAnswer, answer)
+    }
+
+    this.score.text = score.toString()
+    this.nextAnswer.text = "Next"
 }
 
 private fun startWebView(webView: WebView, savedInstanceState: Bundle?, url: String) {

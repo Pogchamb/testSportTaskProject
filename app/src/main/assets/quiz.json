@@ -1,0 +1,494 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the most popular sport in the world by attendance?",
+      "variants": [
+        "Football",
+        "Basketball",
+        "Volleyball"
+      ],
+      "correctAnswer": "Volleyball"
+    },
+    {
+      "id": 2,
+      "question": "Who is the current football world champion?",
+      "variants": [
+        "Germany",
+        "Brazil",
+        "France"
+      ],
+      "correctAnswer": "Germany"
+    },
+    {
+      "id": 3,
+      "question": "Which country has won the most gold medals in the history of the Olympic Games?",
+      "variants": [
+        "USA",
+        "USSR",
+        "China"
+      ],
+      "correctAnswer": "China"
+    },
+    {
+      "id": 4,
+      "question": "In which sport does the largest stadium in the world use?",
+      "variants": [
+        "Cricket",
+        "Football",
+        "Rugby"
+      ],
+      "correctAnswer": "Cricket"
+    },
+    {
+      "id": 5,
+      "question": "Which athlete has won the most Grand Slam tournaments in tennis history?",
+      "variants": [
+        "Baj Patty",
+        "Baj Baj",
+        " Baj Roger"
+      ],
+      "correctAnswer": "Baj Patty"
+    },
+    {
+      "id": 6,
+      "question": "Which team has won the most Super Bowls in American football?",
+      "variants": [
+        "Broncos",
+        " San Francisco 49ers",
+        "Pittsburgh Steelers"
+      ],
+      "correctAnswer": "San Francisco 49ers"
+    },
+    {
+      "id": 7,
+      "question": "Which is the tallest basketball player in the history of the NBA?",
+      "variants": [
+        "Manute Bol",
+        "Shaquille O’Neal",
+        "Hakeem Warrick"
+      ],
+      "correctAnswer": "Manute Bol"
+    },
+    {
+      "id": 8,
+      "question": "Which footballer has scored the most goals in history?",
+      "variants": [
+        "Lionel Messi",
+        "Pelé",
+        "Cristiano Ronaldo"
+      ],
+      "correctAnswer": "Lionel Messi"
+    },
+    {
+      "id": 9,
+      "question": "Which boxer became the first ever heavyweight world champion?",
+      "variants": [
+        "Joe Louis",
+        "Muhammad Ali",
+        "Mike Tyson"
+      ],
+      "correctAnswer": "Joe Louis"
+    },
+    {
+      "id": 10,
+      "question": "Who has won the most races in the Tour de France?",
+      "variants": [
+        "Eddy Merckx",
+        "Bernard Hinault",
+        "Lance Armstrong"
+      ],
+      "correctAnswer": "Eddy Merckx"
+    },
+    {
+      "id": 11,
+      "question": "Which sport involves riding a bike on a track?",
+      "variants": [
+        "Cycling ",
+        "Skiing",
+        "Skating"
+      ],
+      "correctAnswer": "Cycling"
+    },
+    {
+      "id": 12,
+      "question": "In which sport the players try to score goals by throwing a ball through a hoop?",
+      "variants": [
+        "Basketball",
+        "Handball",
+        "Football"
+      ],
+      "correctAnswer": "Basketball"
+    },
+    {
+      "id": 13,
+      "question": "Name the sport where players throw a heavy, round, rubber object as far as possible?",
+      "variants": [
+        "Tennis",
+        "Golf",
+        "Badminton"
+      ],
+      "correctAnswer": "Golf"
+    },
+    {
+      "id": 14,
+      "question": "What sport has players who compete in pairs or teams to hit a small hard ball with rackets?",
+      "variants": [
+        "Baseball",
+        "Squash",
+        "Table tennis"
+      ],
+      "correctAnswer": "Squash"
+    },
+    {
+      "id": 15,
+      "question": "The sport where players use a long stick to hit a round object is?",
+      "variants": [
+        "Cricket",
+        "Hockey",
+        "Soccer"
+      ],
+      "correctAnswer": "Hockey"
+    },
+    {
+      "id": 16,
+      "question": "A sport involving throwing a spear at a target is?",
+      "variants": [
+        "Archery",
+        "Weightlifting",
+        "Boxing"
+      ],
+      "correctAnswer": "Archery"
+    },
+    {
+      "id": 17,
+      "question": "Players in which sport wear masks and try to score points by hitting each other with padded sticks?",
+      "variants": [
+        "Water polo",
+        " Snowboarding",
+        "Karate"
+      ],
+      "correctAnswer": "Karate"
+    },
+    {
+      "id": 18,
+      "question": "Which of these sports does not involve using a ball?",
+      "variants": [
+        "Judo",
+        "Rugby",
+        "Field hockey"
+      ],
+      "correctAnswer": "Judo"
+    },
+    {
+      "id": 19,
+      "question": "Who competes in the sport of skiing?",
+      "variants": [
+        "Cyclists",
+        "Skaters",
+        "Skiers"
+      ],
+      "correctAnswer": "Skiers"
+    },
+    {
+      "id": 20,
+      "question": "How many players are on a team in baseball?",
+      "variants": [
+        "3",
+        "9",
+        "11"
+      ],
+      "correctAnswer": "11"
+    },
+    {
+      "id": 21,
+      "question": "Which sport is played on grass?",
+      "variants": [
+        "Basketball",
+        "Cricket",
+        "Rugby"
+      ],
+      "correctAnswer": "Cricket"
+    },
+    {
+      "id": 22,
+      "question": "In which team sport, do players wear helmets?",
+      "variants": [
+        "Field Hockey",
+        "Soccer",
+        "Basketball"
+      ],
+      "correctAnswer": "Field Hockey"
+    },
+    {
+      "id": 23,
+      "question": "What type of sport is Tennis?",
+      "variants": [
+        "Individual",
+        "Team",
+        "Pair"
+      ],
+      "correctAnswer": "Individual"
+    },
+    {
+      "id": 24,
+      "question": "Name a winter sport?",
+      "variants": [
+        "Skiing",
+        "Running",
+        "Volleyball"
+      ],
+      "correctAnswer": "Skiing"
+    },
+    {
+      "id": 25,
+      "question": "A sport in which players kick balls is called what?",
+      "variants": [
+        "Kickball",
+        "Soccerball",
+        "Volleyball"
+      ],
+      "correctAnswer": "Soccerball"
+    },
+    {
+      "id": 26,
+      "question": "The sport in which a player uses a stick to hit a ball over a net is called?",
+      "variants": [
+        "Volleyball",
+        "Tennis",
+        "Squash"
+      ],
+      "correctAnswer": "Squash"
+    },
+    {
+      "id": 27,
+      "question": "How many team members are there for Basketball?",
+      "variants": [
+        "Three",
+        "Five",
+        "Twelve"
+      ],
+      "correctAnswer": "Five"
+    },
+    {
+      "id": 28,
+      "question": "Players of which sport use a racket?",
+      "variants": [
+        "Table Tennis",
+        "Volleyball",
+        "Badminton"
+      ],
+      "correctAnswer": "Table Tennis"
+    },
+    {
+      "id": 29,
+      "question": "Who plays in the sport Baseball?",
+      "variants": [
+        "Two players",
+        "Nine players",
+        "Eleven players"
+      ],
+      "correctAnswer": "Eleven players"
+    },
+    {
+      "id": 30,
+      "question": "In what sport do you play as a member of a team?",
+      "variants": [
+        "Swimming",
+        "Gymnastics",
+        "Handball"
+      ],
+      "correctAnswer": "Handball"
+    },
+    {
+      "id": 31,
+      "question": "Which sport is the national sport of Canada?",
+      "variants": [
+        "Baseball",
+        "Basketball",
+        "Hockey"
+      ],
+      "correctAnswer": "Hockey"
+    },
+    {
+      "id": 32,
+      "question": "Which sport does not use balls?",
+      "variants": [
+        "Football",
+        "Judo",
+        "Golf"
+      ],
+      "correctAnswer": "Judo"
+    },
+    {
+      "id": 33,
+      "question": "Which sport uses a curved blade?",
+      "variants": [
+        "Badminton",
+        "Fencing",
+        "Squash"
+      ],
+      "correctAnswer": "Fencing"
+    },
+    {
+      "id": 34,
+      "question": "Which country has won the most FIFA World Cups?",
+      "variants": [
+        "Brazil",
+        "Germany",
+        "Argentina"
+      ],
+      "correctAnswer": "Brazil"
+    },
+    {
+      "id": 35,
+      "question": "Which sport requires the most skill?",
+      "variants": [
+        "Gymnastics",
+        "Wrestling",
+        "Swimming"
+      ],
+      "correctAnswer": "Gymnastics"
+    },
+    {
+      "id": 36,
+      "question": "Which sport has the highest scoring rate?",
+      "variants": [
+        "Volleyball",
+        "Football",
+        "Basketball"
+      ],
+      "correctAnswer": "Football"
+    },
+    {
+      "id": 37,
+      "question": "Which sport is considered the “sport of kings”?",
+      "variants": [
+        "Cricket",
+        "Polo",
+        "Golf"
+      ],
+      "correctAnswer": "Polo"
+    },
+    {
+      "id": 38,
+      "question": "Which sport was first played in America??",
+      "variants": [
+        "Baseball",
+        "Basketball",
+        "Football"
+      ],
+      "correctAnswer": "Baseball"
+    },
+    {
+      "id": 39,
+      "question": "Which sport takes place in the water?",
+      "variants": [
+        "Surfing",
+        "Diving",
+        "Swimming"
+      ],
+      "correctAnswer": "Swimming"
+    },
+    {
+      "id": 40,
+      "question": "Baseball is a sport that originated in which country?",
+      "variants": [
+        "America",
+        "Canada",
+        "England"
+      ],
+      "correctAnswer": "America"
+    },
+    {
+      "id": 41,
+      "question": "In which sport do players use rackets to hit a shuttlecock?",
+      "variants": [
+        "Badminton",
+        "Squash",
+        "Table Tennis"
+      ],
+      "correctAnswer": "Badminton"
+    },
+    {
+      "id": 42,
+      "question": "In which sport does the ball need to be dribbled and passed while moving?",
+      "variants": [
+        "Basketball",
+        "Volleyball",
+        "Football"
+      ],
+      "correctAnswer": "Football"
+    },
+    {
+      "id": 43,
+      "question": "In which sport is it important to have a fast-moving bat?",
+      "variants": [
+        "Baseball",
+        "Cricket",
+        "Tennis"
+      ],
+      "correctAnswer": "Baseball"
+    },
+    {
+      "id": 44,
+      "question": "What is the name of the sport where two players hit a small ball back and forth over a low net?",
+      "variants": [
+        "Volleyball",
+        "Badminton",
+        "Squash"
+      ],
+      "correctAnswer": "Badminton"
+    },
+    {
+      "id": 45,
+      "question": "In which sport can players wear protective gear on their heads?",
+      "variants": [
+        "Basketball",
+        "Soccer",
+        "Field Hockey"
+      ],
+      "correctAnswer": "Field Hockey"
+    },
+    {
+      "id": 46,
+      "question": "In which sport are players required to wear gloves?",
+      "variants": [
+        "Boxing",
+        "Karate",
+        "Taekwondo"
+      ],
+      "correctAnswer": "Boxing"
+    },
+    {
+      "id": 47,
+      "question": "In which sport, players compete against one another in pairs?",
+      "variants": [
+        "Badminton",
+        "Table Tennis",
+        "Rugby"
+      ],
+      "correctAnswer": "Table Tennis"
+    },
+    {
+      "id": 48,
+      "question": "In which sport must players wear special shoes to play?",
+      "variants": [
+        "Basketball",
+        "Tennis",
+        "Running"
+      ],
+      "correctAnswer": "Running"
+    },
+    {
+      "id": 49,
+      "question": "In which sport players use a large inflatable ball to play on water?",
+      "variants": [
+        "Canoe",
+        "Swimming",
+        "Water Polo"
+      ],
+      "correctAnswer": "FWater Polo"
+    }
+  ]
+}

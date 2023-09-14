@@ -1,17 +1,19 @@
 package pa.chan.main_page.data
 
+import android.content.Context
 import pa.chan.main_page.data.userException.ConnectionException
 import pa.chan.main_page.domain.MainRepository
-import pa.chan.main_page.domain.model.TrainModel
+import pa.chan.main_page.domain.model.QuestionModel
 import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
-    private val trainingDataSource: TrainingDataSource,
+    private val questionDataSource: QuestionDataSource,
     private val prefDataSource: PrefDataSource,
     private val remoteConfigDataSource: RemoteConfigDataSource
 ) : MainRepository {
-    override fun getWeekTrain(): List<TrainModel> {
-        return trainingDataSource.getWeekListOfTrain()
+    override fun getQuiz(context: Context): List<QuestionModel>? {
+        val quiz = questionDataSource.getQuizList(context)?.questions
+        return quiz
     }
 
     override suspend fun saveLink(url: String) {
