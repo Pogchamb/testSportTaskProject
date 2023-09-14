@@ -5,17 +5,20 @@ import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.webkit.CookieManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfig
+import com.google.firebase.remoteconfig.ktx.remoteConfigSettings
 import dagger.hilt.android.AndroidEntryPoint
 import pa.chan.BuildConfig
 import pa.chan.R
 import pa.chan.databinding.ActivityMainBinding
-import pa.chan.main_page.data.userException.ConnectionException
 import java.util.*
 
 @AndroidEntryPoint
@@ -32,113 +35,115 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
         var totalScore = 0
-
         webView = findViewById(R.id.webView)
 
         viewModel.hasLink()
-        viewModel.hasLinkLiveData.observe(this) { url ->
-            if (url.isNullOrEmpty()) {
+
+        viewModel.hasLinkLiveData.observe(this) {
+
+            if (it == true) {
                 viewModel.getUrl()
             } else {
+                try {
+                    val file = FirebaseRemoteConfig.getInstance()
+                    val remoteConfig: FirebaseRemoteConfig = Firebase.remoteConfig
+                    val configSettings = remoteConfigSettings {
+                        minimumFetchIntervalInSeconds = 3600
+                    }
+                    remoteConfig.setConfigSettingsAsync(configSettings)
+                    remoteConfig.fetchAndActivate()
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                task.result
+                                val url = file.getString("url")
+
+                                Log.e("Tag", "url = $url ${url.isEmpty()}  emu = ${checkIsEmu()}")
+                                if (url.isEmpty() || checkIsEmu()) {
+                                    _binding?.goneAll()
+                                    viewModel.startStub(this)
+                                } else {
+                                    viewModel.saveLink(url)
+                                    _binding?.showWebView()
+                                    startWebView(webView = webView, savedInstanceState, url)
+                                }
+                            } else {
+                                _binding?.showError()
+                            }
+                        }
+
+                } catch (e: Exception) {
+                    _binding?.showError()
+                }
+
+            }
+
+            viewModel.linkLiveData.observe(this) { url ->
                 val connectionManager: ConnectivityManager =
                     this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                 val activeNetwork: NetworkInfo? = connectionManager.activeNetworkInfo
                 val isConnected = activeNetwork?.isConnectedOrConnecting == true
 
                 if (isConnected) {
-                    _binding?.ErrorField?.visibility = View.GONE
-                    _binding?.webView?.visibility = View.VISIBLE
-                    _binding?.quizLayout?.visibility = View.GONE
-                    binding?.startLayout?.visibility = View.GONE
-                    startWebView(webView, savedInstanceState, url)
+                    _binding?.showWebView()
+                    startWebView(webView, savedInstanceState, url.toString())
                 } else {
-                    _binding?.ErrorField?.visibility = View.VISIBLE
-                    _binding?.webView?.visibility = View.GONE
-                    _binding?.quizLayout?.visibility = View.GONE
-                    binding?.startLayout?.visibility = View.GONE
+                    _binding?.showError()
                 }
-            }
-        }
 
-        viewModel.quizLiveData.observe(this) {
-            binding?.startLayout?.visibility = View.VISIBLE
-        }
-
-        binding?.nextAnswer?.setOnClickListener {
-            binding?.startGame(totalScore)
-            viewModel.nextQuestion()
-        }
-
-        binding?.newGame?.setOnClickListener {
-            totalScore = 0
-            binding?.refreshGame(totalScore, this)
-        }
-
-        viewModel.questionLiveData.observe(this) { model ->
-            binding?.totalScoreField?.text =
-                String.format(getString(R.string.current_score), totalScore.toString())
-            binding?.question?.text = model?.question
-            binding?.firstAnswer?.text = model?.variants?.get(0)
-            binding?.secondAnswer?.text = model?.variants?.get(1)
-            binding?.thirdAnswer?.text = model?.variants?.get(2)
-
-
-            binding?.firstAnswer?.setOnClickListener {
-                if (binding?.firstAnswer!!.text == model?.correctAnswer) {
-                    totalScore += 100
-                    binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
-                } else {
-                    totalScore -= 50
-                    binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
-                }
             }
 
-            binding?.secondAnswer?.setOnClickListener {
-                if (binding?.secondAnswer!!.text == model?.correctAnswer) {
-                    totalScore += 100
-                    binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
-                } else {
-                    totalScore -= 50
-                    binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
+            viewModel.quizLiveData.observe(this) {
+                binding?.startLayout?.visibility = View.VISIBLE
+            }
+
+            viewModel.questionLiveData.observe(this) { model ->
+                binding?.totalScoreField?.text =
+                    String.format(getString(R.string.current_score), totalScore.toString())
+                binding?.question?.text = model?.question
+                binding?.firstAnswer?.text = model?.variants?.get(0)
+                binding?.secondAnswer?.text = model?.variants?.get(1)
+                binding?.thirdAnswer?.text = model?.variants?.get(2)
+
+
+                binding?.firstAnswer?.setOnClickListener {
+                    if (binding?.firstAnswer!!.text == model?.correctAnswer) {
+                        totalScore += 100
+                        binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
+                    } else {
+                        totalScore -= 50
+                        binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
+                    }
+                }
+
+                binding?.secondAnswer?.setOnClickListener {
+                    if (binding?.secondAnswer!!.text == model?.correctAnswer) {
+                        totalScore += 100
+                        binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
+                    } else {
+                        totalScore -= 50
+                        binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
+                    }
+                }
+
+                binding?.thirdAnswer?.setOnClickListener {
+                    if (binding?.thirdAnswer!!.text == model?.correctAnswer) {
+                        totalScore += 100
+                        binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
+                    } else {
+                        totalScore -= 50
+                        binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
+                    }
                 }
             }
 
-            binding?.thirdAnswer?.setOnClickListener {
-                if (binding?.thirdAnswer!!.text == model?.correctAnswer) {
-                    totalScore += 100
-                    binding?.nextQuestion(model?.correctAnswer, totalScore, "+100", this)
-                } else {
-                    totalScore -= 50
-                    binding?.nextQuestion(model?.correctAnswer, totalScore, "-50", this)
-                }
+            binding?.nextAnswer?.setOnClickListener {
+                binding?.startGame(totalScore)
+                viewModel.nextQuestion()
             }
-        }
 
-
-        viewModel.linkLiveData.observe(this) { url ->
-            if (checkIsEmu() || url.isNullOrEmpty()) {
-                _binding?.ErrorField?.visibility = View.GONE
-                _binding?.webView?.visibility = View.GONE
-                _binding?.quizLayout?.visibility = View.GONE
-                viewModel.startStub(this)
-            } else {
-                viewModel.saveLink(url)
-                _binding?.ErrorField?.visibility = View.GONE
-                _binding?.webView?.visibility = View.VISIBLE
-                _binding?.quizLayout?.visibility = View.GONE
-                binding?.startLayout?.visibility = View.GONE
-                startWebView(webView = webView, savedInstanceState, url)
-            }
-        }
-
-        viewModel.errorLiveData.observe(this) { error ->
-            when (error) {
-                ConnectionException -> {
-                    _binding?.ErrorField?.visibility = View.VISIBLE
-                    _binding?.webView?.visibility = View.GONE
-                    _binding?.quizLayout?.visibility = View.GONE
-                    binding?.startLayout?.visibility = View.GONE
-                }
+            binding?.newGame?.setOnClickListener {
+                totalScore = 0
+                binding?.refreshGame(totalScore, this)
             }
         }
     }
@@ -148,6 +153,13 @@ class MainActivity : AppCompatActivity() {
         super.onSaveInstanceState(outState)
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        // Восстанавливаем состояние WebView после восстановления активности
+        webView.restoreState(savedInstanceState)
+    }
+
     override fun onBackPressed() {
         if (webView.canGoBack()) {
             webView.goBack()
@@ -155,69 +167,27 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-private fun ActivityMainBinding.refreshGame(score: Int, context: Context) {
-    this.startLayout.visibility = View.VISIBLE
-    this.ErrorField.visibility = View.GONE
-    this.webView.visibility = View.GONE
-    this.score.text = score.toString()
-    this.textRules.text = context.getString(R.string.rules)
-    this.nextAnswer.text = context.getString(R.string.start)
-    this.quizLayout.visibility = View.GONE
-}
-
-private fun ActivityMainBinding.startGame(score: Int) {
-    this.startLayout.visibility = View.GONE
-    this.ErrorField.visibility = View.GONE
-    this.webView.visibility = View.GONE
-    this.score.text = score.toString()
-    this.quizLayout.visibility = View.VISIBLE
-}
-
-private fun ActivityMainBinding.nextQuestion(
-    rightAnswer: String?,
-    score: Int,
-    answer: String,
-    context: Context
-) {
-    this.startLayout.visibility = View.VISIBLE
-    this.ErrorField.visibility = View.GONE
-    this.webView.visibility = View.GONE
-    this.quizLayout.visibility = View.GONE
-    if (rightAnswer == answer) {
-        this.textRules.text =
-            String.format(context.getString(R.string.rightAnswerStr), rightAnswer, answer)
-    } else {
-        this.textRules.text =
-            String.format(context.getString(R.string.rightAnswerStr), rightAnswer, answer)
-    }
-
-    this.score.text = score.toString()
-    this.nextAnswer.text = "Next"
-}
-
 private fun startWebView(webView: WebView, savedInstanceState: Bundle?, url: String) {
     webView.webViewClient = WebViewClient()
     val webSettings = webView.settings
-    webSettings.javaScriptEnabled = true
-    if (savedInstanceState != null)
-        webView.restoreState(savedInstanceState)
-    else
-        webView.loadUrl(url)
-    webView.settings.domStorageEnabled = true
-    webView.settings.javaScriptCanOpenWindowsAutomatically = true
-    val cookieManager = CookieManager.getInstance()
-    cookieManager.setAcceptCookie(true)
-    val mWebSettings = webView.settings
-    mWebSettings.javaScriptEnabled = true
-    mWebSettings.loadWithOverviewMode = true
-    mWebSettings.useWideViewPort = true
-    mWebSettings.domStorageEnabled = true
-    mWebSettings.databaseEnabled = true
-    mWebSettings.setSupportZoom(false)
-    mWebSettings.allowFileAccess = true
-    mWebSettings.allowContentAccess = true
-    mWebSettings.loadWithOverviewMode = true
-    mWebSettings.useWideViewPort = true
+    webSettings.apply {
+        javaScriptEnabled = true
+        loadWithOverviewMode = true
+        useWideViewPort = true
+        domStorageEnabled = true
+        databaseEnabled = true
+        setSupportZoom(false)
+        allowFileAccess = true
+        allowContentAccess = true
+    }
+    if (savedInstanceState != null) webView.restoreState(savedInstanceState) else webView!!.loadUrl(
+        url
+    )
+
+    webView!!.settings.apply {
+        domStorageEnabled = true
+        javaScriptCanOpenWindowsAutomatically = true
+    }
 }
 
 private fun checkIsEmu(): Boolean {

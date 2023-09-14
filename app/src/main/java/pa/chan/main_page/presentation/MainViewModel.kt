@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import pa.chan.main_page.data.userException.ConnectionException
-import pa.chan.main_page.data.userException.UserException
 import pa.chan.main_page.domain.*
 import pa.chan.main_page.domain.model.QuestionModel
 import javax.inject.Inject
@@ -24,17 +22,13 @@ class MainViewModel @Inject constructor(
     val quizLiveData: LiveData<List<QuestionModel?>?>
         get() = _quizLiveData
 
-    private val _hasLinkLiveData: MutableLiveData<String?> = MutableLiveData()
-    val hasLinkLiveData: LiveData<String?>
+    private val _hasLinkLiveData: MutableLiveData<Boolean?> = MutableLiveData()
+    val hasLinkLiveData: LiveData<Boolean?>
         get() = _hasLinkLiveData
 
     private val _linkLiveData: MutableLiveData<String?> = MutableLiveData()
     val linkLiveData: LiveData<String?>
         get() = _linkLiveData
-
-    private val _errorLiveData: MutableLiveData<UserException> = MutableLiveData()
-    val errorLiveData: LiveData<UserException>
-        get() = _errorLiveData
 
     private val _questionLiveData: MutableLiveData<QuestionModel?> = MutableLiveData()
     val questionLiveData: LiveData<QuestionModel?>
@@ -42,11 +36,7 @@ class MainViewModel @Inject constructor(
 
     fun getUrl() {
         viewModelScope.launch {
-            try {
-                _linkLiveData.postValue(getUrlUseCase())
-            } catch (e: ConnectionException) {
-                _errorLiveData.postValue(e)
-            }
+            _linkLiveData.postValue(getUrlUseCase())
         }
     }
 

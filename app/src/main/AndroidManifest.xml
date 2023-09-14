@@ -10,7 +10,6 @@
     <application
         android:name=".core.App"
         android:allowBackup="true"
-        android:configChanges="orientation|screenSize"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +20,7 @@
         tools:targetApi="33">
         <activity
             android:name=".main_page.presentation.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true"
             android:usesCleartextTraffic="true">
             <intent-filter>

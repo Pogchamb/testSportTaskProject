@@ -10,7 +10,7 @@
         android:id="@+id/quizLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="30dp"
+        android:background="@drawable/dream_background"
         android:visibility="gone">
 
         <com.google.android.material.button.MaterialButton
@@ -44,10 +44,11 @@
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#6F2C2C2C"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="#353434"
-            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.29"
@@ -98,49 +99,57 @@
         android:id="@+id/startLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="40dp"
+        android:background="@drawable/dream_background"
+
         android:visibility="gone">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#6F2C2C2C"
             android:gravity="center"
             android:padding="15dp"
             android:text="@string/score"
-            android:textColor="@color/question"
+            android:textColor="@color/white"
             android:textSize="40sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.185"
+            app:layout_constraintVertical_bias="0.05"
             tools:layout_editor_absoluteX="0dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#6F2C2C2C"
             android:gravity="center"
             android:padding="15dp"
             android:text="@string/zero"
-            android:textColor="@color/question"
+            android:textColor="@color/white"
             android:textSize="40sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/answer" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textRules"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#6F2C2C2C"
             android:gravity="center"
             android:padding="18dp"
             android:text="@string/rules"
-            android:textColor="#353434"
+            android:textColor="@color/white"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/score" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
             android:backgroundTint="@color/question"
             android:elevation="4dp"
             android:padding="20dp"
