@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "976304519401",
-    "project_id": "testsporttaskproject",
-    "storage_bucket": "testsporttaskproject.appspot.com"
+    "project_number": "828922332356",
+    "project_id": "djshc-73c30",
+    "storage_bucket": "djshc-73c30.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:976304519401:android:63bde0061a2205ebaad878",
+        "mobilesdk_app_id": "1:828922332356:android:8f48c9783f2ebe2474b591",
         "android_client_info": {
-          "package_name": "pa.chan"
+          "package_name": "piulimk.prezinip"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyA4YocwNSMAdsdk5rXmrUTaJGtD28_T_gE"
+          "current_key": "AIzaSyAJ_VYFbzu5ZSAwlglQpTHRwOmLoTA43G4"
         }
       ],
       "services": {
