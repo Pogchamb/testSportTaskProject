@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'pa.chan'
+    namespace 'piulimk.prezinip'
     compileSdk 33
 
     defaultConfig {
-        applicationId "pa.chan"
+        applicationId "piulimk.prezinip"
         minSdk 21
         targetSdk 33
         versionCode 1

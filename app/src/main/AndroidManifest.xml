@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="pa.chan">
+    package="piulimk.prezinip">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".core.App"
+        android:name="piulimk.prezinip.core.App"
         android:allowBackup="true"
-        android:configChanges="orientation|screenSize"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -20,7 +19,8 @@
         android:theme="@style/Theme.TestSportTaskProject"
         tools:targetApi="33">
         <activity
-            android:name=".main_page.presentation.MainActivity"
+            android:name="piulimk.prezinip.main_page.presentation.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true"
             android:usesCleartextTraffic="true">
             <intent-filter>

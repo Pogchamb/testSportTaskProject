@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/mainLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background = "@drawable/dream_background"
     tools:context=".main_page.presentation.MainActivity">
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:background="#6F2C2C2C"
+        android:indeterminateTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.392" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/quizLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="30dp"
+        android:background="@drawable/dream_background"
         android:visibility="gone">
 
         <com.google.android.material.button.MaterialButton
@@ -44,10 +61,11 @@
             android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#6F2C2C2C"
             android:gravity="center"
             android:padding="15dp"
-            android:textColor="#353434"
-            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.29"
@@ -98,49 +116,57 @@
         android:id="@+id/startLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="40dp"
+        android:background="@drawable/dream_background"
+
         android:visibility="gone">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#6F2C2C2C"
             android:gravity="center"
             android:padding="15dp"
             android:text="@string/score"
-            android:textColor="@color/question"
+            android:textColor="@color/white"
             android:textSize="40sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.185"
+            app:layout_constraintVertical_bias="0.05"
             tools:layout_editor_absoluteX="0dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#6F2C2C2C"
             android:gravity="center"
             android:padding="15dp"
             android:text="@string/zero"
-            android:textColor="@color/question"
+            android:textColor="@color/white"
             android:textSize="40sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/answer" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textRules"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#6F2C2C2C"
             android:gravity="center"
             android:padding="18dp"
             android:text="@string/rules"
-            android:textColor="#353434"
+            android:textColor="@color/white"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/score" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextAnswer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
             android:backgroundTint="@color/question"
             android:elevation="4dp"
             android:padding="20dp"
